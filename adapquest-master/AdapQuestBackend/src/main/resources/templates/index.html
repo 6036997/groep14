@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/layout :: layout">
+    <title id="pageTitle" th:text="${pageTitle}">AdapQuest</title>
+</head>
+<body>
+
+<div class="container">
+    <div th:replace="fragments/layout :: header"></div>
+
+    <div class="jumbotron">
+        <h1 th:text="${title}"></h1>
+        <p th:text="${description}"></p>
+
+        <p>Surveys available:</p>
+
+        <ul>
+            <li th:each="code : ${codes}">
+                <a th:href="|@{./start/}${code}|" th:text="${code}"></a>
+            </li>
+        </ul>
+    </div>
+
+    <div th:replace="fragments/layout :: footer"></div>
+</div>
+
+<script>
+
+</script>
+
+</body>
+</html>
