@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="style.css">
+<title>Adaptieve Vragenlijst</title>
+<style>
+     body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        background-color: #f3f4f6;
+        background-image: url('img/wow.jpg');
+    }
+    .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #b6b6b6d0;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1, h2 {
+        text-align: center;
+        color: #333;
+    }
+    #question {
+        margin-bottom: 20px;
+        font-size: 1.2em;
+    }
+    #answer {
+        margin-top: 20px;
+    }
+    input[type="radio"] {
+        margin-bottom: 10px;
+    }
+    button {
+        display: block;
+        margin: 20px auto 0 auto;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4caf50;
+        color: white;
+        cursor: pointer;
+        font-size: 1em;
+        transition: background-color 0.3s ease;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Adaptieve Vragenlijst</h1>
+    <div id="question">Hoe voel je je vandaag?</div>
+    <div id="answer">
+        <input type="radio" name="mood" value="1"> Goed<br>
+        <input type="radio" name="mood" value="2"> Slecht<br>
+    </div>
+
+    <button id="button" onclick="nextQuestion()">Volgende</button>
+</div>
+<script>
+    function nextQuestion() {
+        var mood = document.querySelector('input[name="mood"]:checked').value;
+        switch (mood) {
+            case "1":
+                document.getElementById("question").innerHTML = "Waarom gaat het goed?";
+                document.getElementById("answer").innerHTML = '<input type="radio" name="activity" value="1"> Film gekeken<br>\
+                                                               <input type="radio" name="activity" value="2"> Uitgaan met vrienden<br>';
+                break;
+
+            case "2":
+                document.getElementById("question").innerHTML = "Waarom gaat het slecht?";
+                document.getElementById("answer").innerHTML = '<input type="radio" name="activity" value="3"> Huisarrest<br>\
+                                                               <input type="radio" name="activity" value="4"> Ik ben ziek<br>';
+                break;
+        }
+        document.getElementById("answer").style.display = "block";
+        document.getElementById("button").setAttribute("onclick", "nextQuestion2()");
+    }
+
+    function nextQuestion2() {
+        var activity = document.querySelector('input[name="activity"]:checked').value;
+        switch (activity) {
+            case "1":
+                document.getElementById("question").innerHTML = "Welke film heb je gekeken?";
+                document.getElementById("answer").innerHTML = '<input type="radio" name="film" value="1"> Harry Potter<br>\
+                                                               <input type="radio" name="film" value="2"> Game of Thrones<br>';
+                break;
+            case "2":
+                document.getElementById("question").innerHTML = "Waar ben je naartoe gegaan?";
+                document.getElementById("answer").innerHTML = '<input type="radio" name="uitgaan" value="1"> De bioscoop<br>\
+                                                               <input type="radio" name="uitgaan" value="2"> Het strand<br>';
+                break;
+            case "3":
+                document.getElementById("question").innerHTML = "Waarom heb je huisarrest?";
+                document.getElementById("answer").innerHTML = '<input type="radio" name="huisarrest" value="1"> Ik ging spijbelen<br>\
+                                                               <input type="radio" name="huisarrest" value="2"> Slechte cijfers<br>';
+                break;
+            case "4":
+                document.getElementById("question").innerHTML = "Wat heb je?";
+                document.getElementById("answer").innerHTML = '<input type="radio" name="ziek" value="1"> Koorts<br>\
+                                                               <input type="radio" name="ziek" value="2"> Corona<br>';
+                break;
+        }
+        document.getElementById("answer").style.display = "block";
+        document.getElementById("button").setAttribute("onclick", "nextQuestion3()");
+    }
+
+    function nextQuestion3() {
+        var lastQuestion = document.querySelector('input[name="film"]:checked, input[name="uitgaan"]:checked, input[name="huisarrest"]:checked, input[name="ziek"]:checked');
+        if (lastQuestion) {
+            lastQuestion = lastQuestion.value;
+            switch (lastQuestion) {
+                case "1":
+                    document.getElementById("question").innerHTML = "Was het leuk?";
+                    document.getElementById("answer").innerHTML = '<input type="radio" name="Film" value="1"> Ja<br>\
+                                                                   <input type="radio" name="Film" value="2"> Nee<br>';
+                    break;
+                case "2":
+                    document.getElementById("question").innerHTML = "Was het leuk?";
+                    document.getElementById("answer").innerHTML = '<input type="radio" name="Film" value="1"> Ja<br>\
+                                                                   <input type="radio" name="Film" value="2"> Nee<br>';
+                    break;
+
+                case "3":
+                    document.getElementById("question").innerHTML = "Was het leuk?";
+                    document.getElementById("answer").innerHTML = '<input type="radio" name="Uitgaan" value="1"> Ja<br>\
+                                                                   <input type="radio" name="Uitgaan" value="2"> Nee<br>';
+                    break;
+                case "4":
+                    document.getElementById("question").innerHTML = "Was het leuk?";
+                    document.getElementById("answer").innerHTML = '<input type="radio" name="Uitgaan" value="1"> Ja<br>\
+                                                                   <input type="radio" name="Uitgaan" value="2"> Nee<br>';
+                    break;
+
+                case "5":
+                    document.getElementById("question").innerHTML = "Waarom?";
+                    document.getElementById("answer").innerHTML = '<input type="radio" name="Huisarest" value="1"> Ik haat school<br>\
+                                                                   <input type="radio" name="Huisarest" value="2"> Ik wou naar buiten<br>';
+                    break;
+                case "6":
+                    document.getElementById("question").innerHTML = "Waarom?";
+                    document.getElementById("answer").innerHTML = '<input type="radio" name="Huisarest" value="1"> Ik leer niet<br>\
+                                                                   <input type="radio" name="Huisarest" value="2"> Ik ben dom<br>';
+                    break;
+
+                case "7":
+                    document.getElementById("question").innerHTML = "Jammer";
+                    document.getElementById("answer").innerHTML = '<input type="radio" name="ziek" value="1"> Ja<br>\
+                                                                   <input type="radio" name="ziek" value="2"> Nee<br>';
+                    break;
+                case "8":
+                    document.getElementById("question").innerHTML = "Jammer";
+                    document.getElementById("answer").innerHTML = '<input type="radio" name="ziek" value="1"> Ja<br>\
+                                                                   <input type="radio" name="ziek" value="2"> Nee<br>';
+                    break;
+            }
+            document.getElementById("answer").style.display = "block";
+            document.getElementById("button").setAttribute("onclick", "submitForm()");
+        }
+    }
+
+    function submitForm() {
+        alert("Bedankt voor het invullen van de vragenlijst!");
+    }
+
+</script>
+</body>
+</html>
